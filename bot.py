@@ -7,6 +7,7 @@ from data import config
 import asyncio
 import logging
 import sys
+import handlers
 from menucommands.set_bot_commands  import set_default_commands
 from baza.sqlite import Database
 from filters.admin import IsBotAdminFilter
