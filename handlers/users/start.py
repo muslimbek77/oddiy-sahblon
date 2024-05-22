@@ -1,10 +1,14 @@
-from aiogram import Router, F
 from aiogram.types import Message
+from loader import dp,db
+from aiogram.filters import CommandStart
 
 
-my_router = Router(name=__name__)
-
-
-@my_router.message()
-async def message_handler(message: Message):
-    await message.answer('Hello from my router!')
+@dp.message(CommandStart())
+async def start_command(message:Message):
+    full_name = message.from_user.full_name
+    telegram_id = message.from_user.id
+    try:
+        db.add_user(full_name=full_name,telegram_id=telegram_id) #foydalanuvchi bazaga qo'shildi
+        await message.answer(text="Assalomu alaykum, botimizga hush kelibsiz")
+    except:
+        await message.answer(text="Assalomu alaykum")
